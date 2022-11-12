@@ -8,6 +8,8 @@
 
 // STEP 4: search for a movie in the list
 
-// STEP 5: remove a movie from the list
+// STEP 5: update a movie in the list
+
+// STEP 6: remove a movie from the list
 
 // set the server to listen at port
