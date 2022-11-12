@@ -2,7 +2,7 @@ const { urlencoded } = require('body-parser');
 const express = require('express');
 const app = express();
 
-const PORT = 3001;
+const PORT = 3000;
 
 // parse the JSON data using express
 app.use(express.json());
@@ -37,17 +37,20 @@ app.post("/movie", (req, res) => {
 
 // update a movie in the list
 app.put("/movie/:id", (req, res) => {
-    const found = movies.some(movie => movie.id === parseInt(req.params.id));
-    
+    found = false;
+    const id = req.params.id;
+    var movie;
+    for (let m of movies){
+        if (m.id === id){
+            movie = m;
+            found = true;
+        }
+    }
     if (found){
         const updateMovie = req.body;
-        movies.forEach(movie => {
-            if (movie.id === parseInt(req.params.id)) {
-                user.title = updateMovie.title ? updateMovie.title: user.title;
-                user.director = updateMovie.director ? updateMovie.director: user.director;
-                res.json({msg: "Movie has been updated!", movie})
-            }
-        })
+        movie.title = updateMovie.title ? updateMovie.title: movie.title;
+        movie.director = updateMovie.director ? updateMovie.director: movie.director;
+        res.json({msg: "Movie has been updated!", movie})
     }
 });
 
